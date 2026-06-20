@@ -2,7 +2,7 @@
 
 **A Strategic Framework for Governance of Autonomous Multi-Agent Systems**
 
-*Working Draft — Not for Distribution*
+*Working Draft by Konstantinos Kazakos (kgkazakos@gmail.com) — Not for Distribution*
 
 ---
 
