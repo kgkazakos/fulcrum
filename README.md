@@ -57,4 +57,4 @@ This repository contains conceptual framework documentation only. Algorithmic me
 
 ---
 
-*FULCRUM is independent research. For inquiries, contact the author.*
+*FULCRUM is independent research by Konstantinos Kazakos during his personal time. For inquiries, contact the author at kgkazakos@gmail.com.*
