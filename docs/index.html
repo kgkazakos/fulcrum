@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FULCRUM — Multi-Persona Mediation for Enterprise Agent Networks</title>
+<meta name="description" content="Governance architecture for resolving conflicts between autonomous AI agents. Independent research by Kostas Kazakos.">
+<style>
+:root { --bg: #0f172a; --surface: #1e293b; --border: #334155; --text: #e2e8f0; --dim: #94a3b8; --accent: #6366f1; --accent2: #818cf8; --green: #4ade80; --yellow: #facc15; --red: #f87171; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; line-height: 1.7; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.2em; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+h1 span { font-weight: 400; font-size: 0.5em; color: var(--dim); letter-spacing: 0; display: block; margin-top: 4px; }
+h2 { font-size: 1.3em; font-weight: 700; color: var(--accent2); margin: 40px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+h3 { font-size: 1.05em; font-weight: 600; color: var(--text); margin: 24px 0 8px; }
+p { margin-bottom: 16px; color: var(--dim); }
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.hero { border-bottom: 1px solid var(--border); padding-bottom: 32px; margin-bottom: 32px; }
+.hero .disclaimer { font-size: 0.85em; color: #475569; font-style: italic; margin-top: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+.card { background: var(--surface); border-radius: 10px; padding: 20px; border-left: 3px solid var(--accent); }
+.card h3 { margin-top: 0; color: var(--accent2); font-size: 1em; }
+.card p { font-size: 0.9em; margin-bottom: 0; }
+.btn { display: inline-block; padding: 10px 24px; background: var(--accent); color: white; border-radius: 6px; font-weight: 600; font-size: 0.95em; margin: 4px 8px 4px 0; }
+.btn:hover { background: var(--accent2); text-decoration: none; }
+.btn.secondary { background: var(--surface); border: 1px solid var(--border); }
+.pipeline { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; align-items: center; }
+.pipeline .step { background: var(--surface); padding: 8px 16px; border-radius: 6px; font-size: 0.85em; font-weight: 600; }
+.pipeline .arrow { color: var(--accent); font-size: 1.2em; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+.stat { text-align: center; }
+.stat .num { font-size: 2em; font-weight: 900; color: var(--accent2); font-family: 'JetBrains Mono', monospace; }
+.stat .label { font-size: 0.8em; color: var(--dim); }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--border); color: var(--dim); font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em; }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: 'JetBrains Mono', monospace; }
+pre { background: var(--surface); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; font-size: 0.85em; }
+pre code { background: none; padding: 0; }
+footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 0.85em; color: #475569; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<h1>FULCRUM <span>Multi-Persona Mediation for Enterprise Agent Networks</span></h1>
+<p>A governance architecture for resolving conflicts between autonomous AI agents through constraint-satisfaction synthesis.</p>
+<p class="disclaimer">Independent research by Kostas Kazakos. Not affiliated with any current or previous employer.</p>
+<div style="margin-top: 20px;">
+<a class="btn" href="https://fulcrum-demo.vercel.app" target="_blank">Try the Demo</a>
+<a class="btn secondary" href="https://github.com/kgkazakos/fulcrum" target="_blank">GitHub</a>
+</div>
+</div>
+
+<h2>The Problem</h2>
+<p>When autonomous agents with competing objectives reach a deadlock — each operating correctly within its mandate — no existing framework resolves the conflict without human intervention. Orchestration frameworks coordinate agents toward shared goals. But what happens when goals genuinely conflict?</p>
+
+<h2>The Approach</h2>
+<div class="pipeline">
+<div class="step">Signal Ingestion</div><div class="arrow">→</div>
+<div class="step">Tension Detection</div><div class="arrow">→</div>
+<div class="step">Signal Fusion</div><div class="arrow">→</div>
+<div class="step">Persona Evaluation</div><div class="arrow">→</div>
+<div class="step">Constraint Synthesis</div><div class="arrow">→</div>
+<div class="step">Ruling Delivery</div>
+</div>
+<p>FULCRUM introduces <strong>multi-persona constraint-satisfaction synthesis</strong>: multiple stakeholder personas independently evaluate a tension, each producing binding constraints. The synthesis finds the resolution satisfying all constraints simultaneously — not a vote, not a debate, but the intersection of independently-produced requirement sets.</p>
+
+<h2>Key Results</h2>
+<div class="stats">
+<div class="stat"><div class="num">0.93</div><div class="label">Mean Ruling Quality</div></div>
+<div class="stat"><div class="num">+0.42</div><div class="label">vs Static Rules</div></div>
+<div class="stat"><div class="num">5/5</div><div class="label">Properties Verified</div></div>
+<div class="stat"><div class="num">4</div><div class="label">Framework Adapters</div></div>
+</div>
+
+<h2>Documentation</h2>
+<div class="card-grid">
+<div class="card">
+<h3>Whitepaper</h3>
+<p>Strategic framework and conceptual architecture. Establishes agentic mediation as an infrastructure category.</p>
+<a href="https://github.com/kgkazakos/fulcrum/blob/main/whitepaper/FULCRUM_whitepaper.md">Read →</a>
+</div>
+<div class="card">
+<h3>Grounding Scenario</h3>
+<p>SENTINEL vs VELOCITY — the credential rotation conflict used as the worked example throughout.</p>
+<a href="https://github.com/kgkazakos/fulcrum/blob/main/scenario/scenario_security_vs_procurement.md">Read →</a>
+</div>
+<div class="card">
+<h3>Agent Telemetry SDK</h3>
+<p>The telemetry contract agents must satisfy. Four channels, three compliance levels, four framework adapters.</p>
+<a href="https://github.com/kgkazakos/fulcrum/blob/main/sdk/agent_telemetry_sdk.md">Read →</a>
+</div>
+<div class="card">
+<h3>Interactive Demo</h3>
+<p>Adjust signal values and watch the mediation ruling change in real time. See constraint-satisfaction synthesis in action.</p>
+<a href="https://fulcrum-demo.vercel.app" target="_blank">Launch →</a>
+</div>
+</div>
+
+<h2>SDK Quick Start</h2>
+<pre><code>pip install fulcrum-sdk
+
+from fulcrum_sdk import FulcrumTelemetry
+
+t = FulcrumTelemetry(agent_id="my-agent", objective="Resolve incidents fast")
+
+with t.intent_action("permission_request", "secret-store:key-001") as ctx:
+    result = my_agent_logic()
+    ctx.outcome = "success" if result.ok else "failure"
+</code></pre>
+
+<h2>Architecture</h2>
+<table>
+<tr><th>Component</th><th>Role</th></tr>
+<tr><td>Signal Ingestion Bus</td><td>Subscribes to agent telemetry across three signal layers</td></tr>
+<tr><td>Tension Detector</td><td>Identifies stable conflicts via compound triggers</td></tr>
+<tr><td>Signal Fusion Engine</td><td>Weighted-max aggregation within layers, weighted-sum across</td></tr>
+<tr><td>Persona Engine</td><td>Independent stakeholder evaluations with constraint generation</td></tr>
+<tr><td>Ruling Engine</td><td>Constraint-satisfaction synthesis across persona outputs</td></tr>
+<tr><td>Delivery Surface</td><td>Routes rulings to agents and operators</td></tr>
+<tr><td>Outcome Logger</td><td>Audit trail and precedent store with temporal decay</td></tr>
+</table>
+
+<h2>Evaluation</h2>
+<table>
+<tr><th>System</th><th>Mean Q</th><th>Defensibility</th><th>Effectiveness</th></tr>
+<tr><td><strong>FULCRUM</strong></td><td><strong>0.93</strong></td><td><strong>1.00</strong></td><td><strong>0.97</strong></td></tr>
+<tr><td>Single Persona</td><td>0.73</td><td>1.00</td><td>0.61</td></tr>
+<tr><td>Static Rules</td><td>0.51</td><td>0.50</td><td>0.82</td></tr>
+<tr><td>Random</td><td>0.37</td><td>0.50</td><td>0.53</td></tr>
+<tr><td>No Mediation</td><td>0.25</td><td>0.50</td><td>0.20</td></tr>
+</table>
+
+<h2>Publication Targets</h2>
+<p><strong>AJCAI 2026</strong> (Auckland, November) — Peer-reviewed archival paper, Springer LNCS proceedings.<br>
+<strong>NeurIPS 2026</strong> (Sydney, December) — Workshop paper, non-archival. The world's premier AI conference, 40th anniversary.</p>
+
+<footer>
+<p>© 2026 Kostas Kazakos — Independent research, not affiliated with any current or previous employer.</p>
+<p>FULCRUM defines agentic mediation as an infrastructure category — orthogonal to orchestration, complementary to policy enforcement.</p>
+</footer>
+
+</div>
+</body>
+</html>
