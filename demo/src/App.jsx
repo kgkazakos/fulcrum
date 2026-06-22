@@ -48,7 +48,10 @@ function fuse(ew) {
   const sem = aggregateLayer([ew.ofd, ew.vfd, ew.poc]);
   const total = LAYER_W.behavioral + LAYER_W.resource + LAYER_W.semantic;
   const severity = clamp((beh * LAYER_W.behavioral + res * LAYER_W.resource + sem * LAYER_W.semantic) / total);
-  const urgency = clamp(ew.qs > 0.3 ? ew.qs * 1.2 + ew.epa * 0.4 : ew.epa * 0.5);
+  const slaUrg = ew.qs > 0.2 ? (ew.qs / 0.6491) * 0.73 : 0;
+  const trendUrg = slaUrg > 0.4 ? 0.3 : 0;
+  const escUrg = ew.epa > 0.05 ? (ew.epa / 0.319) * 0.75 : 0;
+  const urgency = clamp(slaUrg + trendUrg * 0.3 + escUrg * 0.3);
   return { beh, res, sem, severity, urgency };
 }
 
@@ -57,7 +60,7 @@ const PERSONAS = [
   { name: "Operations",  abbr: "OPS", color: "#3b82f6", salience: [0.2,0.3,0.2,0.9,0.7,0.4,0.8,0.4,0.3,0.5], tc: 0.50, td: 0.85, w: 0.8 },
   { name: "Compliance",  abbr: "CMP", color: "#a855f7", salience: [0.5,0.5,0.4,0.3,0.3,0.1,0.2,0.3,0.2,0.9], tc: 0.20, td: 0.80, w: 0.7 },
   { name: "Cost",        abbr: "CST", color: "#22c55e", salience: [0.2,0.3,0.2,0.8,0.4,0.5,0.3,0.6,0.7,0.4], tc: 0.40, td: 0.75, w: 0.6 },
-  { name: "Cust-Impact", abbr: "CUS", color: "#f97316", salience: [0.1,0.2,0.1,0.9,0.5,0.3,0.7,0.3,0.4,0.3], tc: 0.55, td: 0.90, w: 0.7 },
+  { name: "Customer",    abbr: "CUS", color: "#f97316", salience: [0.1,0.2,0.1,0.9,0.5,0.3,0.7,0.3,0.4,0.3], tc: 0.55, td: 0.90, w: 0.7 },
 ];
 
 function evalPersona(p, ew) {
@@ -75,7 +78,7 @@ function getConstraints(signals) {
   if (signals.md > 0.3)  b.push({ type: "SCOPE_RESTRICTION",   param: "single key",    src: "Security" });
   b.push(                       { type: "ATTESTATION",          param: "cryptographic",  src: "Security + Compliance" });
   if (signals.oli > 0.2) b.push({ type: "POST_ACTION_AUDIT",   param: "human — 24h",   src: "Security + Compliance" });
-  if (signals.qs > 0.5)  b.push({ type: "RESOLUTION_DEADLINE", param: "immediate",      src: "Operations + Cust-Impact" });
+  if (signals.qs > 0.5)  b.push({ type: "RESOLUTION_DEADLINE", param: "immediate",      src: "Operations + Customer" });
   b.push(                       { type: "PRECEDENT_RECORD",     param: "tension + ruling", src: "Compliance" });
   return b;
 }
@@ -175,11 +178,11 @@ function ConstraintRow({ type, param, src, dim }) {
       fontSize: 12, padding: "8px 10px", background: "#0f172a", borderRadius: 6,
       marginBottom: 4, opacity: dim ? 0.5 : 1,
     }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ color: "#e2e8f0", fontWeight: 600, ...s.mono, fontSize: 11 }}>{type}</span>
-        <span style={{ fontSize: 10, ...s.dim }}>{src}</span>
+      <div style={{ color: "#e2e8f0", fontWeight: 600, ...s.mono, fontSize: 11 }}>{type}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 3 }}>
+        <span style={{ color: "#818cf8", fontSize: 11 }}>{param}</span>
+        <span style={{ fontSize: 9, color: "#475569", whiteSpace: "nowrap", marginLeft: 8 }}>{src}</span>
       </div>
-      <div style={{ color: "#818cf8", fontSize: 11, marginTop: 3 }}>{param}</div>
     </div>
   );
 }
